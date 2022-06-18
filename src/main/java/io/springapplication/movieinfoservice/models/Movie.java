@@ -1,5 +1,10 @@
 package io.springapplication.movieinfoservice.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.TokenBufferDeserializer;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,8 +13,17 @@ import java.util.List;
 @Document(collection = "movieInfo")
 public class Movie {
 
-    @Id
-    private String movieId;
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    private ObjectId id;
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     private List<String> type;
 
@@ -20,14 +34,6 @@ public class Movie {
     private List<String> writer;
 
     private List<String> stars;
-
-    public String getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
-    }
 
     public List<String> getType() {
         return type;
