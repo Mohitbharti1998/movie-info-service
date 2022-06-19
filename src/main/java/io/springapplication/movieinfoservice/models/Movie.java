@@ -14,7 +14,7 @@ import java.util.List;
 public class Movie {
 
 
-    @JsonSerialize(using = ToStringSerializer.class)
+    @Id
     private ObjectId id;
 
     public ObjectId getId() {
